@@ -1,0 +1,15 @@
+{% extends 'pages/blank.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-8">
+  <h1 class="text-2xl font-bold mb-4">Запись на приём</h1>
+  {% if form %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Отправить</button>
+  </form>
+  {% endif %}
+  {{error}}
+  </div>
+{% endblock %}

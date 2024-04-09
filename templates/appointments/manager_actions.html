@@ -1,0 +1,24 @@
+{% extends 'pages/blank.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<form method="post" class="mx-auto">
+  {% csrf_token %}
+  <h1>Запись №{{appointment.id}} - {{user.username}} - {{appointment.date_created}}</h1>
+  <div class="mb-5">
+    <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваш ИИН</label>
+    {{ form.time|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}
+  </div>
+  <div class="mb-5">
+    <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваш ИИН</label>
+    {{ form.comment|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}
+  </div>
+  <div class="flex gap-2">
+
+    <button type="submit" class="bg-green-500 text-white font-semibold px-5 py-2 rounded-lg" name="action"
+      value="accept">Accept</button>
+    <button type="submit" class="bg-red-500 text-white font-semibold px-5 py-2 rounded-lg" name="action" value="reject">Reject</button>
+    <button type="submit" class="bg-blue-500 text-white font-semibold px-5 py-2 rounded-lg" name="action" value="modify">Modify</button>
+  </div>
+</form>
+{% endblock content %}
