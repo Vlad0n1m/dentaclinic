@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -275,7 +274,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -289,8 +288,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # }
 
 
-COMPRESS_ROOT = BASE_DIR / 'static'
+# COMPRESS_ROOT = BASE_DIR / 'static'
 LOGIN_REDIRECT_URL = "profile"
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
  
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+# STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
