@@ -2,7 +2,7 @@
 <div class="max-w-md mx-auto mt-8">
   <h1 class="text-2xl font-bold mb-4">Запись на приём</h1>
 
-  <div class="flex flex flex-wrap justify-between">
+  <div class=" flex flex-wrap justify-center">
     <!-- Календарь с датами -->
 
     <div class="w-full max-w-xs mx-auto">
@@ -23,36 +23,18 @@
       </select>
     </div>
 
-    <div>
+    <div  class="flex" >
+
       <div class="calendar bg-gray-100 p-4 flex-1">
         <div inline-datepicker data-date="02/25/2022"></div>
       </div>
 
       <!-- Список с доступным временем -->
-      <div class="time-slots bg-gray-100 p-4 flex-2">
+      <div class="time-slots bg-gray-100 p-4 flex-2 " >
         <h2 class="text-lg font-semibold mb-4">Список доступного времени</h2>
-        {% if appointments %}
-        <div id="mCSB_8_container" class="mCSB_container">
-          <ul class="divide-y divide-gray-200">
-            {% for appointment in appointments %}
-            <li
-              class="slots__item js-slot hover:bg-gray-100 cursor-pointer p-2"
-              data-visit-start="2024-04-26T09:10:00"
-              data-ticket-id="876_2024-04-26_09:10:00_38"
-              data-ticket-address=""
-              data-room="38"
-              data-number="2"
-            >
-              {{appointment}}
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div id="selected-date-message" class="mt-4"></div>
 
-        {% else %}
 
-        <div id="mCSB_8_container" class="mCSB_container">
+        <div id="mCSB_8_container" class="mCSB_container " style="max-height: 250px; overflow: auto;">
           <ul class="divide-y divide-gray-200">
             {% for appointment in appointments %}
             <li
@@ -69,11 +51,8 @@
           </ul>
         </div>
 
-        {% endif %}
       </div>
     </div>
-
-    
   </div>
 
   <!-- Модальное окно -->
