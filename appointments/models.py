@@ -1,6 +1,6 @@
 from django.db import models
 from django.dispatch import receiver
-from authuser.models import Patient, Doctor
+from authuser.models import Patient, Doctor, User
 
 class Appointment(models.Model):
     STATUSES = {
@@ -11,7 +11,7 @@ class Appointment(models.Model):
     }
     patient = models.ForeignKey(Patient, verbose_name="Пациент", on_delete=models.CASCADE, related_name='appointments')
     doctor = models.ForeignKey(Doctor, verbose_name="Врач", on_delete=models.CASCADE, related_name='appointments', null=True, blank=True)
-    time = models.DateTimeField(verbose_name="Время")
+    time = models.DateTimeField(verbose_name="Время (только для чтения)")
     comment = models.TextField(verbose_name="Комментарий", null=True, blank=True)
     status = models.CharField(max_length=1, choices=STATUSES, verbose_name="Статус")
     date_created = models.DateTimeField(auto_now=True, verbose_name="Дата создания")

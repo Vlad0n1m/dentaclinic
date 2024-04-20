@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
-from .views import create_appointment, appointment_detail, manager_actions
+from .views import create_appointment, appointment_detail, manager_actions, available_slots
 urlpatterns = [
     # path('profile', views.profile, name='profile'),
     path('', views.index, name='index'),
     path('create/', create_appointment, name='create_appointment'),
+    path('available_slots/', available_slots, name='available_slots'),
     path('<int:pk>/', appointment_detail, name='appointment_detail'),
     path('<int:pk>/actions/', manager_actions, name='manager_actions'),
 ]

@@ -1,15 +1,125 @@
-{% extends 'pages/blank.html' %}
-
-{% block content %}
+{% extends 'pages/blank.html' %} {% block content %}
 <div class="max-w-md mx-auto mt-8">
   <h1 class="text-2xl font-bold mb-4">Запись на приём</h1>
-  {% if form %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Отправить</button>
-  </form>
-  {% endif %}
-  {{error}}
+
+  <div class="flex flex flex-wrap justify-between">
+    <!-- Календарь с датами -->
+
+    <div class="w-full max-w-xs mx-auto">
+      <label
+        for="doctor"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+        >Выберите врача:</label
+      >
+      <select
+        id="doctor"
+        name="doctor"
+        required
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        {% for doctor in doctors %}
+        <option value="{{ doctor.id }}">{{ doctor.username }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <div class="calendar bg-gray-100 p-4 flex-1">
+        <div inline-datepicker data-date="02/25/2022"></div>
+      </div>
+
+      <!-- Список с доступным временем -->
+      <div class="time-slots bg-gray-100 p-4 flex-2">
+        <h2 class="text-lg font-semibold mb-4">Список доступного времени</h2>
+        {% if appointments %}
+        <div id="mCSB_8_container" class="mCSB_container">
+          <ul class="divide-y divide-gray-200">
+            {% for appointment in appointments %}
+            <li
+              class="slots__item js-slot hover:bg-gray-100 cursor-pointer p-2"
+              data-visit-start="2024-04-26T09:10:00"
+              data-ticket-id="876_2024-04-26_09:10:00_38"
+              data-ticket-address=""
+              data-room="38"
+              data-number="2"
+            >
+              {{appointment}}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div id="selected-date-message" class="mt-4"></div>
+
+        {% else %}
+
+        <div id="mCSB_8_container" class="mCSB_container">
+          <ul class="divide-y divide-gray-200">
+            {% for appointment in appointments %}
+            <li
+              class="slots__item js-slot hover:bg-gray-100 cursor-pointer p-2"
+              data-visit-start="2024-04-26T09:10:00"
+              data-ticket-id="876_2024-04-26_09:10:00_38"
+              data-ticket-address=""
+              data-room="38"
+              data-number="2"
+            >
+              {{appointment}}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% endif %}
+      </div>
+    </div>
+
+    
   </div>
+
+  <!-- Модальное окно -->
+  <div
+    id="myModal"
+    class="hidden fixed inset-0 bg-gray-600 flex items-center justify-center"
+    style="--tw-bg-opacity: 0.5"
+  >
+    <!-- Модальное содержимое -->
+    <div class="relative m-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+      <div class="text-center">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Информация о визите
+        </h3>
+        <div class="mt-2">
+          {% if form %}
+          <form id="modal_form" method="post" class="space-y-4">
+            {% csrf_token %} {{ form.as_p }}
+            <div class="flex justify-center space-x-4">
+              <button
+                id="closeModal"
+                class="bg-red-500 text-white py-2 px-4 rounded hover:text-red-500 hover:border-red-500 border border-transparent transition ease-in duration-200"
+                type="button"
+              >
+                Закрыть
+              </button>
+              <button
+                id="submitForm"
+                class="bg-green-500 text-white py-2 px-4 rounded hover:text-green-500 hover:border-green-500 border border-transparent transition ease-in duration-200"
+                type="button"
+              >
+                Отправить
+              </button>
+            </div>
+          </form>
+          {% endif %} {{error}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %} {{ block.super }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+{% load static %}
+<script src="{% static 'js/Cookie.js' %}"></script>
+\
+<script src="{% static 'js/pacient_appointment.js' %}"></script>
+
 {% endblock %}

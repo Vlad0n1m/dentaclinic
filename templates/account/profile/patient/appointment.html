@@ -1,0 +1,25 @@
+{% load widget_tweaks %}
+<div class="flex flex-col gap-2">
+    {% if appointments %}
+    {% for ap in appointments %}
+    {% if user.is_manager %}
+    <a href="/{{ap.id}}/actions"
+        class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+        {% else %}
+        <a href="/{{ap.id}}"
+            class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+            {% endif %}
+
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ap.time}} -
+                {{ap.get_status_display}}</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">{{ap.comment}}</p>
+        </a>
+
+        {% endfor %}
+    {% else %}
+    <h1 class="text-lg font-medium text-gray-900 dark:text-white">У вас нет никак записей на прием!</h1>
+
+    {% endif %}
+</div>

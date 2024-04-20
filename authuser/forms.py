@@ -15,6 +15,10 @@ class CustomSignupForm(SignupForm):
     phone_number = forms.CharField(label='Номер телефона') 
 
     def save(self, request):
+        if self.email:
+            # Если email не пустой, проверяем на уникальность
+            if user.objects.filter(email=self.email).exists():
+                raise ValueError("Email must be unique.")
         user = super(CustomSignupForm, self).save(request)
         
         user.username = self.cleaned_data['username']
@@ -31,4 +35,4 @@ from .models import Patient
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ('pasport_id', 'adress', 'medcard', 'age') 
+        fields = ('pasport_id', 'phone' , 'adress', 'medcard', 'age') 

@@ -18,4 +18,8 @@ from . import views
 urlpatterns = [
     # path('profile', views.profile, name='profile'),
     path('profile', views.profile, name='profile'),
+    path('add_event/', views.add_event, name='add_event'),
+    path('replace_status/', views.replace_status, name='replace_status'),
+    path('update-event/<int:event_id>/', views.update_event, name='update_event'),
+    path('delete_event/<int:event_id>/', views.delete_event, name='delete_event'),
 ]

@@ -4,7 +4,7 @@
 <div class="max-w-md mx-auto mt-8">
   <h1 class="text-2xl font-bold mb-4">Детали записи на приём</h1>
   <p>Пациент: {{ appointment.patient }}</p>
-  <p>Врач: {{ appointment.doctor }}</p>
+  <p>Врач: {{ appointment.doctor.user }}</p>
   <p>Время: {{ appointment.time }}</p>
   <p>Комментарий: {{ appointment.comment }}</p>
   <p>Статус: {{ appointment.get_status_display }}</p>

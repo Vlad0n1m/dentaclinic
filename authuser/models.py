@@ -29,7 +29,7 @@ class CustomUserManager(UserManager):
     
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField( blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, default='')
     
     is_active = models.BooleanField(default=True)
@@ -48,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email']
     
     class Meta:
+        db_table = 'authuser_user'
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         
@@ -60,6 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='patient')
     pasport_id = models.CharField(max_length=255, blank=True, verbose_name="Паспорт ID")
+    phone = models.CharField(max_length=20, blank=True, verbose_name="Номер телефона")
     adress = models.CharField(max_length=255,  blank=True, verbose_name="Адрес")
     medcard = models.CharField(max_length=255, blank=True,  verbose_name="Медицинская карта")
     age = models.IntegerField(verbose_name="Возраст", blank=True, null=True)

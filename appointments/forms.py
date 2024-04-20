@@ -6,5 +6,6 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         fields = ['time', 'comment']
         widgets = {
-            'time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'time': forms.DateTimeInput(attrs={'type': 'datetime-local'})
+            
         }

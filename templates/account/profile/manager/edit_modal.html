@@ -1,0 +1,82 @@
+<div
+  id="editModal"
+  tabindex="-1"
+  class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center"
+  style="background-color: rgba(0,0,0,0.5);"
+>
+  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 p-6 w-full max-w-md">
+    <button
+      class="close absolute top-2 right-2 m-2 text-2xl font-semibold leading-none bg-transparent border-none"
+      onclick="document.getElementById('editModal').style.display='hidden';"
+    >
+      &times;
+    </button>
+    <form id="editEventForm" method="POST" class="space-y-4">
+      <div>
+        <label for="doctor_id" class="block text-sm font-medium text-gray-700">Doctor:</label>
+        <input
+          type="text"
+          id="doctor_id"
+          name="doctor_id"
+          class="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+
+      <div>
+        <label for="patien_id" class="block text-sm font-medium text-gray-700">Patient:</label>
+        <input
+          type="text"
+          id="patien_id"
+          name="patien_id"
+          class="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+
+      <div>
+        <label for="eventTime" class="block text-sm font-medium text-gray-700">Time:</label>
+        <input
+          type="datetime-local"
+          id="eventTime"
+          name="eventTime"
+          class="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+
+      <div>
+        <label for="status" class="block text-sm font-medium text-gray-700">Status:</label>
+        <select
+          id="status"
+          name="status"
+          class="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="R">Запрошено</option>
+          <option value="A">Подтверждено</option>
+          <option value="S">Успешно проведено</option>
+          <option value="C">Отменено</option>
+          <!-- Добавьте дополнительные опции статуса по необходимости -->
+        </select>
+      </div>
+
+      <div>
+        <label for="comment_id" class="block text-sm font-medium text-gray-700">Comment:</label>
+        <textarea 
+          type="text"
+          id="comment_id"
+          name="comment_id"
+          class="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        ></textarea>
+      </div>
+      
+
+      <div>
+        <button
+          id="editEventBtn"
+          type="button"
+          class="mt-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
