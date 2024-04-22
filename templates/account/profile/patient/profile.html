@@ -9,7 +9,7 @@
   <div class="flex flex-col gap-4 w-full">
     <h1 class="text-lg font-medium text-gray-900 dark:text-white">Здравствуйте, {{ user.username }}!</h1>
     {% if form %}
-    <form method="post">
+    <form id="updateProfileForm" method="post">
       {% csrf_token %}
       <div class="mb-5">
         <label for="pasport_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваш ИИН</label>
@@ -31,7 +31,7 @@
         <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваш возраст</label>
         {{ form.age|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}
       </div>
-      <button class="bg-blue-600 text-white p-2 rounded-lg w-full font-semibold" type="submit">
+      <button  class="bg-blue-600 text-white p-2 rounded-lg w-full font-semibold" type="submit">
         Сохранить
       </button>
     </form>

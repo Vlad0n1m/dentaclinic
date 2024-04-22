@@ -139,7 +139,13 @@ def profile(request):
             updated_form = PatientForm(request.POST, instance=patient_instance)
             if updated_form.is_valid():
                 updated_form.save()
-                return render(request, "pages/profile.html", ctx)
+                return JsonResponse(
+                    {"status": "success", "message": "Профиль  успешно изменен"}
+                )
+            else:
+                return JsonResponse(
+                    {"status": "error", "message": "Не удалось создать профиль"}, status=404
+                )
     elif user.is_manager:
         appointments = Appointment.objects.all()
         data = []
