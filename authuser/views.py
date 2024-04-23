@@ -135,6 +135,7 @@ def profile(request):
             if apointment_exists
             else []
         )
+        # print(ctx['appointments'])
         if request.method == "POST":
             updated_form = PatientForm(request.POST, instance=patient_instance)
             if updated_form.is_valid():
@@ -173,7 +174,7 @@ def profile(request):
                 }
             )
         ctx = {"appointments": data}
-
+        print(ctx)
     elif user.is_doctor:
         appointments = Appointment.objects.filter(doctor=user.id)
         data = []
