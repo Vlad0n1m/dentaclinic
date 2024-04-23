@@ -69,14 +69,15 @@ class Patient(models.Model):
     date_created = models.DateTimeField(auto_now=True, verbose_name="Дата создания")
     date_updated = models.DateTimeField(auto_now_add=True,blank=True, null=True, verbose_name="Дата обновления")
     def __str__(self):
-        return str(self.user.id)
+        return str(self.user.username)
     
 class Doctor(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     date_created = models.DateTimeField(auto_now=True, verbose_name="Дата создания")
     date_updated = models.DateTimeField(auto_now_add=True,blank=True, null=True, verbose_name="Дата обновления")
     def __str__(self):
-        return str(self.user.name)
+        return str(self.user.username)
+    
 class Manager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     def __str__(self):
