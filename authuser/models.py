@@ -69,7 +69,7 @@ class Patient(models.Model):
     date_created = models.DateTimeField(auto_now=True, verbose_name="Дата создания")
     date_updated = models.DateTimeField(auto_now_add=True,blank=True, null=True, verbose_name="Дата обновления")
     def __str__(self):
-        return str(self.user.id)
+        return str(self.user.username)
     
 class Doctor(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -77,10 +77,13 @@ class Doctor(models.Model):
     achievements = models.TextField(verbose_name="Достижения", null=True, blank=True)
     date_created = models.DateTimeField(auto_now=True, verbose_name="Дата создания")
     date_updated = models.DateTimeField(auto_now_add=True,blank=True, null=True, verbose_name="Дата обновления")
-
+    def __str__(self):
+        return str(self.user.username)
+    
 class Manager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    pass
+    def __str__(self):
+        return str(self.user.username)
     
 @receiver(post_save, sender=User)
 def create_user_entity(sender, instance, **kwargs):

@@ -81,6 +81,7 @@
 
     {% if user.is_patient is not True %} 
         var appointments = {{ appointments|safe }};
+        console.log(appointments)
         const events = appointments.map((el) => {
             return {
                 id: el.id,
