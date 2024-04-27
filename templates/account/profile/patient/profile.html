@@ -11,10 +11,10 @@
     {% if form %}
     <form id="updateProfileForm" method="post">
       {% csrf_token %}
-      <div class="mb-5">
+      {% comment %} <div class="mb-5">
         <label for="pasport_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваш ИИН</label>
         {{ form.pasport_id|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}
-      </div>
+      </div> {% endcomment %}
       <div class="mb-5">
         <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваш Телефон</label>
         {{ form.phone|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}

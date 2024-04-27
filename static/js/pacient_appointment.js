@@ -7,6 +7,10 @@ const popup = document.getElementById("myModal");
 function closePopup() {
   popup.classList.add("hidden");
 }
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 // Обработчик клика вне модального окна
 window.onclick = function (event) {
   let modalContent = document.querySelector(".modal-content");
@@ -41,22 +45,30 @@ window.addEventListener("load", function () {
     const formattedDate = selectedDate.toLocaleDateString(); // Пример формата: '2022-02-02'
 
     // Отправляем запрос к серверу для проверки доступности даты
-    fetch(`/available_slots/?date=${formattedDate}&doctor=${selectedDoctorId}`)
+    fetch(`/available_slots/?date=${formattedDate}&doctor=${selectedDoctorId }`)
       .then((response) => response.json())
       .then((data) => {
         // Проверяем ответ от сервера и присваиваем класс "selected" выбранному элементу <span>
         if (data) {
           const container = document.querySelector("#mCSB_8_container ul"); // Получаем контейнер для слотов
           container.innerHTML = ""; // Очищаем существующие элементы
+          
+          const ul = document.getElementById("doctor_information")
+          
+          for(const [key, value] of Object.entries(data.doctor)) {
+            const li = document.createElement("li")
+            li.innerHTML = `<b>${capitalizeFirstLetter(key)}</b>: <span>${(value == null || value === '') ? 'Не задано' : value}</span>`
+            ul.appendChild(li)
+          }
 
           // Перебираем каждое время и создаём элемент списка для каждого слота
-          data.forEach((time) => {
+          data.free_slots.forEach((time) => {
             const li = document.createElement("li");
             li.className =
               "slots__item js-slot hover:bg-gray-100 cursor-pointer p-2";
 
             // Форматируем время
-            const date = new Date(time);
+            const date = new Date(time.slice(0, -1));
             const formattedTime = date.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",

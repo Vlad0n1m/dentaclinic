@@ -46,7 +46,10 @@
         {% include "account/profile/patient/appointment.html" %} 
       {% endif %}
     </div>
-
+    
+    {% if user.is_doctor %}
+      {% include "account/profile/doctor/profile.html" %}
+    {% endif %}
     {% include "account/profile/general/notification_jquery.html" %}
 
   </div>

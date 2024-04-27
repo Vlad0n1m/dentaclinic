@@ -73,6 +73,8 @@ class Patient(models.Model):
     
 class Doctor(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    education = models.TextField(verbose_name="Образование", null=True, blank=True)
+    achievements = models.TextField(verbose_name="Достижения", null=True, blank=True)
     date_created = models.DateTimeField(auto_now=True, verbose_name="Дата создания")
     date_updated = models.DateTimeField(auto_now_add=True,blank=True, null=True, verbose_name="Дата обновления")
 

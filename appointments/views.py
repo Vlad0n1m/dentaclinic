@@ -7,7 +7,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from .models import Appointment
 from datetime import datetime
-
+from django.core.serializers import serialize
 # def profile(request):
 #     if request.method == 'POST':
 #         form = ProfileForm(request.POST, instance=request.user)
@@ -91,6 +91,13 @@ def available_slots(request):
     )
     slots = [start_of_day + timedelta(hours=i) for i in range(9)]  # Генерация 9 слотов
 
+    doctor_data = {
+        "achiewmens": doctor.achievements,
+        "education": doctor.education,
+        "email": doctor.user.email,
+        "username": doctor.user.username
+    }
+    
     busy_slots = Appointment.objects.filter(
         doctor=doctor,
         time__range=(start_of_day, start_of_day + timedelta(days=1)),
@@ -98,8 +105,11 @@ def available_slots(request):
     )
     busy_times = [slot.time for slot in busy_slots]
     free_slots = [slot for slot in slots if slot not in busy_times]
+    print(busy_times)
+    print(free_slots)
+    ctx = {'free_slots': free_slots, 'doctor': doctor_data }
 
-    return JsonResponse(free_slots, safe=False)
+    return JsonResponse(ctx, safe=False)
 
 
 def appointment_detail(request, pk):

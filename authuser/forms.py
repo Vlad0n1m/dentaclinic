@@ -30,8 +30,12 @@ class CustomSignupForm(SignupForm):
         return user
     
 
-from .models import Patient
+from .models import Patient, Doctor
 
+class DoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = ('achievements', 'education')
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient

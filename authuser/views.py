@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from .models import Patient, Manager
-from .forms import PatientForm
+from .forms import PatientForm, DoctorForm
 from appointments.models import Appointment
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import localtime
 from datetime import datetime, timedelta
 from django.http import JsonResponse, HttpResponseNotFound
-from .models import User
+from .models import User, Doctor
 from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here
@@ -149,6 +148,7 @@ def profile(request):
     elif user.is_manager:
         appointments = Appointment.objects.all()
         data = []
+        
 
         for ap in appointments:
             doctor = User.objects.filter(id=ap.doctor_id).first()
@@ -178,6 +178,9 @@ def profile(request):
         appointments = Appointment.objects.filter(doctor=user.id)
         data = []
 
+        doctorinstance = Doctor.objects.get(pk=user.id)
+        form = DoctorForm(instance=doctorinstance)  
+                
         for ap in appointments:
             doctor = User.objects.filter(id=ap.doctor_id).first()
             doctor_data = doctor.username if doctor else "не назначен"
@@ -200,6 +203,12 @@ def profile(request):
                     "status": ap.status,
                 }
             )
-        ctx = {"appointments": data}
+        ctx = {"appointments": data, 'form': form}
+        
+        if request.method == "POST":
+            updated_form = DoctorForm(request.POST, instance=doctorinstance)
+            if updated_form.is_valid():
+                updated_form.save()
+            render(request, "pages/profile.html", ctx)
 
     return render(request, "pages/profile.html", ctx)

@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+
+<div
+  id="profile"
+  role="tabpanel"
+  aria-labelledby="profile-tab"
+  class="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full h-full"
+>
+  <div class="flex flex-col gap-4 w-full">
+    <h1 class="text-lg font-medium text-gray-900 dark:text-white">Здравствуйте, {{ user.username }}!</h1>
+    {% if form %}
+    <form id="updateProfileForm" method="post">
+      {% csrf_token %}
+
+      <div class="mb-5">
+        <label for="achievements" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваши достижения</label>
+        {{ form.achievements|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}
+      </div>
+      <div class="mb-5">
+        <label for="education" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ваше образование</label>
+        {{ form.education|add_class:"bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" }}
+      </div>
+      <button  class="bg-blue-600 text-white p-2 rounded-lg w-full font-semibold" type="submit">
+        Сохранить
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</div>
