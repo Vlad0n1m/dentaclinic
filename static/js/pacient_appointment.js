@@ -19,6 +19,15 @@ window.onclick = function (event) {
   }
 };
 
+function getCurrentDate() {
+  const now = new Date();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed, add one to get the correct month
+  const day = now.getDate().toString().padStart(2, '0');
+  const year = now.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+
 document.getElementById('closeModal').addEventListener('click', (event) => {
   document.getElementById("myModal").classList.add("hidden");
 })

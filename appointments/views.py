@@ -105,8 +105,6 @@ def available_slots(request):
     )
     busy_times = [slot.time for slot in busy_slots]
     free_slots = [slot for slot in slots if slot not in busy_times]
-    print(busy_times)
-    print(free_slots)
     ctx = {'free_slots': free_slots, 'doctor': doctor_data }
 
     return JsonResponse(ctx, safe=False)
